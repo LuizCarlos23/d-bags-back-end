@@ -28,8 +28,8 @@ async function routeInserBagsController(req, res) {
     let values = {
       name: body.name, reference: body.reference,
       type: body.type, handle_type: body.handle_type,
-      length: body.length, width: body.retail_price,
-      height: body.length, retail_price: body.retail_price,
+      length: body.length, width: body.width,
+      height: body.height, retail_price: body.retail_price,
       discount: parseFloat(body.discount), available_quantity: body.available_quantity
     }
     
