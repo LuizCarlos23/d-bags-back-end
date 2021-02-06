@@ -7,8 +7,9 @@ async function bagsByPrice(offset = 0 , price = 80, limitBags = 6, upToOrAbove =
 
     let conditionOption = Op.gte; // Por padão os preços serão maiores ou igual a 'price'
     if (upToOrAbove == "upto") conditionOption = Op.lte // Os preços serão menos ou igual a 'price'
-
-    let allowedValues = [ "50", "80", "100" ] // !! Ligar ao banco de dados - tabela de configuração !!
+    
+    price = parseInt(price) 
+    let allowedValues = [ 50, 80, 100 ] // !! Ligar ao banco de dados - tabela de configuração !!
     if (allowedValues.indexOf(price) === -1) return {"okay": false, "result": null, "message": "Value invalid"}
     
     let result = await tableBags.findAll(

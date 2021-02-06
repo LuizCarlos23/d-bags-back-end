@@ -16,7 +16,6 @@ const routeInsertBags = require("../routes/restricted_insertBags")
 const confirmLogin = require("../routes/restricted_confirmLogin")
 
 // Public route Controllers
-// const home = require("../routes/public_home")
 const bagsbyprice = require("../routes/public_bagsbyprice")
 const newbags = require("../routes/public_newbags")
 const catalog = require("../routes/public_catalog")
