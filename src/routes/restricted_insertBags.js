@@ -30,7 +30,7 @@ async function routeInserBagsController(req, res) {
       type: body.type, handle_type: body.handle_type,
       length: body.length, width: body.retail_price,
       height: body.length, retail_price: body.retail_price,
-      discount: body.discount, available_quantity: body.available_quantity
+      discount: parseFloat(body.discount), available_quantity: body.available_quantity
     }
     
     if (values.discount > 1 || !(values.discount > 0.009)) {
@@ -79,8 +79,6 @@ async function routeInserBagsController(req, res) {
         return `${process.env.APP_URL}public/imgs/bags/${file.filename}`
       })
     }
-
-    console.log(imagePaths)
     // Retorna uma string com os "paths" concatenado e separado por ;(ponto e virgula)
     imagePathsConcatenated = imagePaths.reduce((concat, file) => concat += ";" + file)
 
@@ -88,7 +86,6 @@ async function routeInserBagsController(req, res) {
     values.img_path = imagePathsConcatenated
     values.creation_date = date
 
-    console.log(values)
     if (!await insertBags(values)) {
       deleteImg(files)
       return res.status(500).send({"msg": "Internal error!" })

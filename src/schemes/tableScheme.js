@@ -22,13 +22,13 @@ const bags = {
     type: DataTypes.STRING,
     allowNull: false
   }, length: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     allowNull: false
   }, width: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     allowNull: false
   }, height: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     allowNull: false
   },
   img_path: { 
@@ -36,10 +36,14 @@ const bags = {
     allowNull: false
   },
   retail_price: { 
-    type: DataTypes.INTEGER,
+    type: DataTypes.FLOAT,
     allowNull: false
   }, discount: {
-    type: DataTypes.STRING,
+    type: DataTypes.FLOAT,
+    allowNull: false
+  },
+  retail_price_discount: {
+    type: DataTypes.FLOAT,
     allowNull: false
   },
   available_quantity: { 
