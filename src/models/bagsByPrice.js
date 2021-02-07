@@ -13,12 +13,12 @@ async function bagsByPrice(offset = 0 , price = 80, limitBags = 6, upToOrAbove =
     if (allowedValues.indexOf(price) === -1) return {"okay": false, "result": null, "message": "Value invalid"}
     
     let result = await tableBags.findAll(
-      {attributes: ["id", "name", "retail_price", "retail_price_discount", "type", "length", "width", "height", "img_path" ], 
+      {attributes: ["id", "name", "retail_price", "retail_price_discount", "discount", "type", "length", "width", "height", "img_path" ], 
       where: { retail_price: { [conditionOption]: price}}, 
       // order: [["id", "ASC"]],
       order: [["id", "DESC"]],
       limit: limitBags, offset: offset,logging: false}) 
-
+    
     return {"okay": true, "result": result, "message": "Successful query"}
   } catch (error) {
     console.log(error)

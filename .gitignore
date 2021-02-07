@@ -1,4 +1,4 @@
 node_modules
 .env
-back-end/img/bags/*
-!back-end/img/bags/.gitkeep 
+img/bags/*
+!img/bags/.gitkeep 

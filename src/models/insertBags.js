@@ -4,8 +4,8 @@ async function insertBags(values){
     const db = await connect()
 
     // Preço com desconto sera adicionado a partir do desconto enviado pelo admin
-    values.retail_price_discount = values.retail_price - (values.retail_price * parseFloat(values.discount))
-    console.log(values.retail_price_discount)
+    values.retail_price_discount = values.retail_price - ((values.retail_price / 100) * parseFloat(values.discount))
+
 
     await db.queryInterface.bulkInsert('bags', [values], {logging: false})
     return true

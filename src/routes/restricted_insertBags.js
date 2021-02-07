@@ -33,7 +33,7 @@ async function routeInserBagsController(req, res) {
       discount: parseFloat(body.discount), available_quantity: body.available_quantity
     }
     
-    if (values.discount > 1 || !(values.discount > 0.009)) {
+    if (values.discount > 100 || !(values.discount >= 0)) {
       deleteImg(files)
       return res.status(400).send({"msg": "Invalid form!" })
     }
