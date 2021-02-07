@@ -22,8 +22,8 @@ const catalog = require("../routes/public_catalog")
 
 // Public routes
 routes.use("/public/imgs/bags/", express.static(path.resolve(__dirname, "..", "..", "img", "bags")))
-routes.post("/public/newbags", newbags)
-routes.post("/public/bagsbyprice", bagsbyprice)
+routes.get("/public/newbags", newbags)
+routes.get("/public/bagsbyprice", bagsbyprice)
 
 // Resticted routes
 routes.post("/restricted/login", adminLogin)
