@@ -18,7 +18,6 @@ const confirmLogin = require("../routes/restricted_confirmLogin")
 // Public route Controllers
 const bagsbyprice = require("../routes/public_bagsbyprice")
 const newbags = require("../routes/public_newbags")
-const catalog = require("../routes/public_catalog")
 
 // Public routes
 routes.use("/public/imgs/bags/", express.static(path.resolve(__dirname, "..", "..", "img", "bags")))
@@ -37,6 +36,7 @@ if ( process.env.APP_URL == "localhost"){
 
 routes.get("/", (req, res) => {
   console.log("Alguém passou por aqui!")
+  console.log(req.query)
   return res.send({"message": "Hello World!"})
 })
 

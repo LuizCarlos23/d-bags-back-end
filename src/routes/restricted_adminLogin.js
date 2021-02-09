@@ -4,13 +4,13 @@ async function adminLoginController(req, res){
     const adminVerification = require("../models/adminVerification")
     const { adminValuesValidator: valuesValidator } = require("../schemes/valuesValidatorScheme")
     const { body: values } = req
-    if (!await valuesValidator.isValid(values)) return res.status(400).send({"message": "Invalid form"})
+    if (!await valuesValidator.isValid(values)) return res.status(400).send()
 
     // Retorna um array que pode ter Um ou DOIS elementos, dependendo do resultado.
     // Se as credenciais estiverem certas será retornado um array com os valores [true, id_usuario] 
     // Se não será retornado apenas [false]
     let verificationResult = await adminVerification(values)
-    if( !await verificationResult[0] ) return res.status(400).send({"message": "Invalid user"})
+    if( !await verificationResult[0] ) return res.status(400).send()
     
     let token = jwt.sign({admin: "not"}, process.env.TOKEN_SECRET, {expiresIn: 30 * 1 * 60})
 
@@ -27,11 +27,11 @@ async function adminLoginController(req, res){
         console.log(err)
       }
     })
-    return res.send({"message": "Successfully logged in"})
+    return res.send()
 
   } catch (error) {
     console.log(error)
-    return res.status(500).send({"message": "internal error"})
+    return res.status(500).send()
   }
 }
 

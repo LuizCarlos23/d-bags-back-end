@@ -17,7 +17,7 @@ async function routeInserBagsController(req, res) {
   } catch (error) {
     console.log(error)
     console.log("Error na função deleteImg")
-    return res.status(500).send({"msg": "Server error!" })
+    return res.status(500).send()
   }
 
 
@@ -27,7 +27,7 @@ async function routeInserBagsController(req, res) {
     let { files, body } = req
     let values = {
       name: body.name, reference: body.reference,
-      type: body.type, handle_type: body.handle_type,
+      material_type: body.material_type, handle_type: body.handle_type,
       length: body.length, width: body.width,
       height: body.height, retail_price: body.retail_price,
       discount: parseFloat(body.discount), available_quantity: body.available_quantity
@@ -35,7 +35,7 @@ async function routeInserBagsController(req, res) {
     
     if (values.discount > 100 || !(values.discount >= 0)) {
       deleteImg(files)
-      return res.status(400).send({"msg": "Invalid form!" })
+      return res.status(400).send()
     }
 
     // Função para checar os nomes da imagem
@@ -63,9 +63,9 @@ async function routeInserBagsController(req, res) {
     const { bagsValuesValidator } = require("../schemes/valuesValidatorScheme")
     if (!await bagsValuesValidator.isValid(values)) {
       deleteImg(files)
-      return res.status(400).send({"msg": "Invalid form!" })
+      return res.status(400).send()
     }
-    if (!await checkImage(files)) return res.status(400).send({"msg": "Invalid form!" })
+    if (!await checkImage(files)) return res.status(400).send()
 
     let imagePaths;
     if (process.env.APP_URL == "localhost") {
@@ -80,21 +80,28 @@ async function routeInserBagsController(req, res) {
       })
     }
     // Retorna uma string com os "paths" concatenado e separado por ;(ponto e virgula)
-    imagePathsConcatenated = imagePaths.reduce((concat, file) => concat += ";" + file)
+    let mainImgPath = ''
+    let imagePathsConcatenated = ''
+    imagePaths.map((path, index) => {
+      if (index == 0) return mainImgPath = path
+      if (imagePathsConcatenated == '' ) return imagePathsConcatenated += path
+      imagePathsConcatenated += ";"+path
+    })
+    values.img_paths = imagePathsConcatenated
+    values.main_img_path = mainImgPath
 
     let date = new Date()
-    values.img_path = imagePathsConcatenated
     values.creation_date = date
 
     if (!await insertBags(values)) {
       deleteImg(files)
-      return res.status(500).send({"msg": "Internal error!" })
+      return res.status(500).send()
     }
-    return res.send({"msg": "Successfully register!" })
+    return res.status(200).send({"msg": "Successfully register!" })
   } catch (error) {
     console.log(error)
     deleteImg(files)
-    return res.status(500).send({"msg": "Server error!" })
+    return res.status(500).send()
   }
 }
 module.exports = routeInserBagsController

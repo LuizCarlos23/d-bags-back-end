@@ -40,9 +40,7 @@ function adminLoginController(req, res) {
             break;
           }
 
-          return _context.abrupt("return", res.status(400).send({
-            "message": "Invalid user"
-          }));
+          return _context.abrupt("return", res.status(400).send());
 
         case 16:
           token = jwt.sign({
@@ -64,17 +62,13 @@ function adminLoginController(req, res) {
               console.log(err);
             }
           });
-          return _context.abrupt("return", res.send({
-            "message": "Successfully logged in"
-          }));
+          return _context.abrupt("return", res.send());
 
         case 22:
           _context.prev = 22;
           _context.t0 = _context["catch"](0);
           console.log(_context.t0);
-          return _context.abrupt("return", res.status(500).send({
-            "message": "internal error"
-          }));
+          return _context.abrupt("return", res.status(500).send());
 
         case 26:
         case "end":

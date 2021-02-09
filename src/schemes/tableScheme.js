@@ -14,7 +14,7 @@ const bags = {
     type: DataTypes.STRING,
     allowNull: false
   },
-  type: { 
+  material_type: { 
     type: DataTypes.STRING,
     allowNull: false
   },
@@ -31,7 +31,11 @@ const bags = {
     type: DataTypes.STRING,
     allowNull: false
   },
-  img_path: { 
+  img_paths: { 
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  main_img_path: { 
     type: DataTypes.STRING,
     allowNull: false
   },

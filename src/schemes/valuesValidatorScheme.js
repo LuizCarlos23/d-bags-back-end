@@ -3,7 +3,7 @@ const yup = require("yup")
 const bagsValuesValidator = yup.object().shape({
   name: yup.string().required(),
   reference: yup.string().required(),
-  type: yup.string().required(),
+  material_type: yup.string().required(),
   handle_type: yup.string().required(),
   length: yup.string().required(),
   width: yup.string().required(),
